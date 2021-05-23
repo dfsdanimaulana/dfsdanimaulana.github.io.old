@@ -37,7 +37,7 @@
             /*border:2px solid;*/
         }
         .hide {
-            display: none;
+            visibility: hidden;
         }
         .bar-list {
             display: flex;
@@ -56,6 +56,19 @@
             position: relative;
             margin: 3px auto;
             /*border:2px solid;*/
+        }
+        .side-list-cover {
+            position: fixed;
+            bottom: 85px;
+            right: 80px;
+            z-index: 9999;
+        }
+        .side-list {
+            background-color: lightblue;
+            border-radius: 20px;
+            height: 40px;
+            width: 150px;
+            margin: 5px auto;
         }
     </style>
 </head>
@@ -78,7 +91,12 @@
             </div>
         </div>
     </div>
-
+    <div class="side-list-cover hide">
+        <div class="side-list hide"></div>
+        <div class="side-list hide"></div>
+        <div class="side-list hide"></div>
+        <div class="side-list hide"></div>
+    </div>
     <nav class="navbar navbar-dark bg-primary shadow-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">Dani Maulana</a>
@@ -236,11 +254,19 @@
         const wa = document.querySelector('.wa');
         wa.addEventListener('click', ()=> {
             const wa_bar = document.querySelector('.wa-bar');
+            const side_list_cover = document.querySelector('.side-list-cover');
             wa_bar.classList.toggle('hide');
+            side_list_cover.classList.toggle('hide')
         });
-        const show = () => {
-            alert(this);
+        const bar_list = document.getElementsByClassName('bar-list');
+        const side_list = document.getElementsByClassName('side-list');
+
+        for (let i = 0; i < bar_list.length; i++) {
+            bar_list[i].addEventListener('click', ()=> {
+                side_list[i].classList.toggle('hide');
+            });
         }
+
 
     </script>
 </body>
